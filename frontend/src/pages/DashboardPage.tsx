@@ -13,7 +13,7 @@ import { ComplianceMatrix } from '../components/dashboard/ComplianceMatrix';
 import { SessionDetailModal } from '../components/dashboard/SessionDetailModal';
 
 export const DashboardPage: React.FC = () => {
-  const { data: captures = [], isLoading: capturesLoading, isError, error, refetch: refetchCaptures } = useCaptures();
+  const { data: captures = [], isLoading: capturesLoading } = useCaptures();
   const [selectedCaptureId, setSelectedCaptureId] = useState<string>('');
   const [selectedSessionId, setSelectedSessionId] = useState<string | null>(null);
 
@@ -31,53 +31,9 @@ export const DashboardPage: React.FC = () => {
 
   if (capturesLoading) {
     return (
-      <div className="max-w-7xl mx-auto py-24 px-4 text-center space-y-4">
-        <RefreshCw className="w-8 h-8 animate-spin mx-auto text-accent" />
-        <div className="space-y-1">
-          <p className="text-sm font-semibold text-ink">Loading network capture records...</p>
-          <p className="text-xs text-text-muted font-mono">Connecting to: {apiClient.getBaseUrl()}</p>
-        </div>
-      </div>
-    );
-  }
-
-  if (isError || captures.length === 0) {
-    return (
-      <div className="max-w-3xl mx-auto py-16 px-4">
-        <div className="bg-canvas border border-red-200/80 rounded-2xl p-6 sm:p-8 shadow-subtle space-y-5 text-center">
-          <div className="w-12 h-12 rounded-2xl bg-red-50 text-red-600 flex items-center justify-center mx-auto">
-            <AlertCircle className="w-6 h-6" />
-          </div>
-          <div className="space-y-2">
-            <h2 className="text-lg font-bold text-ink font-sans">Unable to Reach Backend API</h2>
-            <p className="text-xs sm:text-sm text-text-muted max-w-md mx-auto">
-              {error instanceof Error ? error.message : 'The frontend could not retrieve capture records from the backend server.'}
-            </p>
-          </div>
-
-          <div className="bg-field p-3.5 rounded-xl border border-hairline/60 font-mono text-xs text-text-muted break-all text-left">
-            <span className="font-bold text-ink block mb-1">Target API Base URL:</span>
-            <span>{apiClient.getBaseUrl()}</span>
-          </div>
-
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-2">
-            <button
-              onClick={() => refetchCaptures()}
-              className="btn-primary w-full sm:w-auto px-5 py-2.5 text-xs font-semibold flex items-center justify-center gap-2"
-            >
-              <RefreshCw className="w-3.5 h-3.5" />
-              <span>Retry Connection</span>
-            </button>
-            <a
-              href={`${apiClient.getBaseUrl()}/health`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-outline w-full sm:w-auto px-5 py-2.5 text-xs font-semibold flex items-center justify-center gap-2 text-ink"
-            >
-              <span>Test /api/health</span>
-            </a>
-          </div>
-        </div>
+      <div className="max-w-7xl mx-auto py-24 px-4 text-center space-y-3">
+        <RefreshCw className="w-8 h-8 animate-spin mx-auto text-ink" />
+        <p className="text-sm font-semibold text-text-muted">Loading network capture records...</p>
       </div>
     );
   }
