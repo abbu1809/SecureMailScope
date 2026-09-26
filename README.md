@@ -158,22 +158,55 @@ docker compose down
 
 ---
 
-### Option 2: Cloud PaaS Deployment (Render / Railway / Fly.io / Heroku)
+### Option 2: Cloud Deployment (Vercel + Railway) — Production Setup
 
-#### 1. Backend Deployment (e.g. Render / Railway):
-- **Build Command**: `pip install -r requirements.txt`
-- **Start Command**: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
-- **Root Directory**: `backend`
-- **Environment Variables**:
-  - `PORT=8000` (or injected automatically by platform)
+This is the exact setup for running the **Frontend on Vercel** (`https://SecureMailScope.techemist.dev`) and the **Backend on Railway**.
 
-#### 2. Frontend Deployment (e.g. Vercel / Netlify / Cloudflare Pages):
-- **Framework Preset**: Vite
-- **Root Directory**: `frontend`
-- **Build Command**: `npm run build`
-- **Output Directory**: `dist`
-- **Environment Variables**:
-  - `VITE_API_BASE=https://your-backend-service.onrender.com/api`
+```
+  ┌────────────────────────────────────────────────────────┐
+  │                      End Users                         │
+  └──────────────────────────┬─────────────────────────────┘
+                             │
+            ┌────────────────┴────────────────┐
+            ▼                                 ▼
+┌───────────────────────────────┐ ┌───────────────────────────────┐
+│       Vercel (Frontend)       │ │       Railway (Backend)       │
+│  SecureMailScope.techemist.dev│ │  securemailscope-api.up.railway.app
+│      (React 18 + Vite SPA)    │ │      (FastAPI + ML Engine)    │
+└───────────────────────────────┘ └───────────────────────────────┘
+```
+
+#### Step 1: Deploy Backend to Railway 🚂
+1. Sign in to [Railway.app](https://railway.app) and click **"New Project"**.
+2. Select **"Deploy from GitHub repo"** and choose your repository.
+3. Click on the newly created service and go to **Settings**:
+   - **Root Directory**: Set to `/backend`
+   - **Build**: Railway automatically uses `backend/Dockerfile` or `backend/requirements.txt`
+4. Go to **Networking** tab:
+   - Click **"Generate Domain"** (e.g. `https://securemailscope-backend-production.up.railway.app`) or attach a custom domain (e.g. `https://api.securemailscope.techemist.dev`).
+5. Verify health check: Navigate to `https://<your-railway-domain>/api/health` in your browser.
+
+#### Step 2: Deploy Frontend to Vercel ▲
+1. Sign in to [Vercel](https://vercel.com) and click **"Add New Project"**.
+2. Import your GitHub repository.
+3. In the **Configure Project** screen:
+   - **Framework Preset**: `Vite`
+   - **Root Directory**: Click **Edit** and choose `frontend`
+   - **Build Command**: `npm run build`
+   - **Output Directory**: `dist`
+4. Expand **Environment Variables** and add:
+   - **Key**: `VITE_API_BASE`
+   - **Value**: `https://<your-railway-domain>/api` *(e.g. `https://securemailscope-backend-production.up.railway.app/api`)*
+5. Click **"Deploy"**.
+
+#### Step 3: Configure Custom Domain on Vercel 🌐
+1. Once deployed, go to your project on Vercel **Settings** → **Domains**.
+2. Add your domain: `SecureMailScope.techemist.dev`.
+3. In your DNS provider (e.g. Cloudflare, Namecheap, Route53, GoDaddy) for `techemist.dev`:
+   - **CNAME Record**:
+     - **Name**: `SecureMailScope`
+     - **Value / Target**: `cname.vercel-dns.com`
+4. Vercel will automatically provision an SSL/TLS certificate for `https://SecureMailScope.techemist.dev`.
 
 ---
 
