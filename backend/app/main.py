@@ -56,6 +56,8 @@ app.include_router(analytics_router)
 app.include_router(reports_router)
 app.include_router(rules_router)
 
+@app.get("/")
+@app.get("/health")
 @app.get("/api/health")
 async def health_check():
     return {
