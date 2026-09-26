@@ -1,0 +1,32 @@
+# Git
+.git
+.gitignore
+
+# Documentation & Specifications
+*.pdf
+DESIGN.md
+
+# Python
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+.venv
+venv
+env
+*.egg-info
+.pytest_cache
+
+# Node
+node_modules
+frontend/node_modules
+frontend/dist
+dist
+
+# OS & Editor
+.DS_Store
+Thumbs.db
+.vscode
+.idea
+*.log

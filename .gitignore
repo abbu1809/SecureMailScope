@@ -1,0 +1,150 @@
+# =============================================================================
+# SecureMailScope — Unified Repository .gitignore
+# Covers Python Backend (FastAPI), Node.js Frontend (Vite/React), and IDEs/OS
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# 1. Python & Backend
+# -----------------------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+bin/
+include/
+share/
+
+# Testing & Coverage
+.pytest_cache/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+htmlcov/
+
+# Static Type Checking & Linters
+.mypy_cache/
+.pytype/
+.ruff_cache/
+
+# -----------------------------------------------------------------------------
+# 2. Frontend (Node.js / React / Vite / TypeScript)
+# -----------------------------------------------------------------------------
+node_modules/
+frontend/node_modules/
+frontend/dist/
+frontend/dist-ssr/
+frontend/.oxlintrc.json.cache
+*.local
+.npm
+.yarn/cache
+.yarn/unplugged
+.pnp
+.pnp.js
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+.eslintcache
+.stylelintcache
+
+# -----------------------------------------------------------------------------
+# 3. Environment Variables & Secrets
+# -----------------------------------------------------------------------------
+.env
+.env.*
+!.env.example
+!.env.template
+*.env
+*.pem
+*.key
+*.cert
+*.pfx
+
+# -----------------------------------------------------------------------------
+# 4. Logs & Temp Files
+# -----------------------------------------------------------------------------
+logs/
+*.log
+*.tmp
+*.temp
+tmp/
+temp/
+scratch/
+.system_generated/
+
+# Exclude uploaded raw temporary capture dumps (preserve synthetic sample_pcaps/)
+backend/app/temp_pcaps/
+backend/uploads/
+uploads/
+
+# -----------------------------------------------------------------------------
+# 5. IDEs, Editors & OS Files
+# -----------------------------------------------------------------------------
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+Desktop.ini
+
+# Visual Studio Code
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/launch.json
+
+# JetBrains IDEs (PyCharm, WebStorm, IDEA)
+.idea/
+*.iml
+*.iws
+
+# Sublime Text / Eclipse / Visual Studio
+*.sublime-workspace
+*.sublime-project
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp
+*.swo
+*~
+
+# -----------------------------------------------------------------------------
+# 6. Docker
+# -----------------------------------------------------------------------------
+.docker/
+docker-compose.override.yml

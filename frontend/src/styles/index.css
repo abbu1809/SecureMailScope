@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-ink: #141414;
+  --color-ink-soft: #262626;
+  --color-canvas: #ffffff;
+  --color-canvas-soft: #f3f3f3;
+  --color-field: #f0f0f0;
+  --color-hairline: #e0e0e0;
+  --color-hairline-soft: #f0f0f0;
+  --color-accent: #0066ff;
+  --color-text-muted: #707070;
+  --color-text-faint: #adadad;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  color: var(--color-ink);
+  background-color: var(--color-canvas);
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom Mobbin-inspired scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #d4d4d4;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #a3a3a3;
+}
+
+/* Base Pill and Button Tokens from DESIGN.md */
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center font-semibold text-white bg-ink rounded-full px-5 py-2.5 transition-all duration-150 hover:bg-ink-soft active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed;
+  }
+  
+  .btn-outline {
+    @apply inline-flex items-center justify-center font-semibold text-ink bg-canvas border border-hairline rounded-full px-5 py-2.5 transition-all duration-150 hover:bg-canvas-soft active:scale-[0.98] disabled:opacity-40;
+  }
+
+  .btn-pill-soft {
+    @apply inline-flex items-center justify-center font-medium text-ink bg-canvas-soft rounded-full px-4 py-2 text-sm transition-all duration-150 hover:bg-hairline active:scale-[0.98];
+  }
+
+  .nav-pill {
+    @apply bg-canvas-soft/90 backdrop-blur-md border border-hairline-soft/80 rounded-full px-6 py-2.5 flex items-center justify-between;
+  }
+
+  .card-container {
+    @apply bg-canvas border border-hairline-soft rounded-md p-6 transition-all;
+  }
+
+  .card-featured {
+    @apply bg-canvas-soft rounded-md p-6 border-none transition-all;
+  }
+
+  .input-field {
+    @apply bg-field text-ink rounded-sm px-4 py-3 outline-none border border-transparent focus:border-ink transition-all placeholder:text-text-faint text-sm;
+  }
+
+  .squircle-icon {
+    @apply rounded-[30%] flex items-center justify-center;
+  }
+}
